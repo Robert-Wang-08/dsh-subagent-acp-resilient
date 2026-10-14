@@ -123,6 +123,32 @@ schemastery **不校验未知键**，会原样透传。因此拼错一个超时�
 完成时再通知父会话。ACP 没有 `prepareContinuable`，所以 `backgroundMode` 必须是 `one-shot`
 （设成 `continuable` 会在加载时抛错）。
 
+## 安装（另一台设备）
+
+已发布为私有仓库并钉了 annotated tag，**仓库根即包根**：
+
+```powershell
+dsh plugin --profile <profile> add github:Robert-Wang-08/dsh-subagent-acp-resilient#v0.2.1
+```
+
+已实测：从该 tag 全新安装可解析（+31 包）、模块可导入、默认阶梯为 30s/60s/10min/45min。
+运行时依赖（`@agentclientprotocol/sdk`、`@deepseek-ai/schemastery`、`@deepseek-ai/dsh-brand`）
+与各 peer 均可从公共 npm 解析。
+
+**插件本体不等于配置。** `cordis.patch.yml` 里的 `subagent-acp-*` provider 行、PTC bundle、
+以及各档 tier 值都必须在该设备另行就位，否则插件装上了也没有 agent 可用。
+`dsh-config-pack` 的 PTC companion 模板是这条路的分发载体。
+
+**事实源与发布的关系：** 工作区 `D:/src/ynm3000` 里的这份是事实源，跨设备安装用的独立仓库
+由它单向镜像而来：
+
+```bash
+git subtree split --prefix=dsh-subagent-acp-resilient -b acp-publish
+git push https://github.com/Robert-Wang-08/dsh-subagent-acp-resilient.git acp-publish:main
+```
+
+改完要重新推，否则独立仓库会落后于事实源（**它不会自动同步**）。
+
 ## 测试与诊断工具
 
 ```bash

@@ -14,7 +14,9 @@
 import type { Context } from '@deepseek-ai/cordis';
 import z from '@deepseek-ai/schemastery';
 import { type PermissionPolicy, type WorkspaceGuardEntry } from './run.ts';
-export declare const name = 'subagent-acp-resilient';
+/** The cordis plugin name the implementation exports. */
+export declare const name = 'subagent-acp';
+/** Services this plugin requires before `apply` runs. */
 export declare const inject: string[];
 /**
  * Every config key this provider actually reads. The loader's schema does NOT
