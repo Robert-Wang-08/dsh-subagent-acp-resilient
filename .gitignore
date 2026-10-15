@@ -5,3 +5,5 @@ test/.tmp/
 *-out.json
 scan*.json
 acp-recovery/
+# Machine-local PTC orchestration state — never part of the plugin contract.
+.ptc/
